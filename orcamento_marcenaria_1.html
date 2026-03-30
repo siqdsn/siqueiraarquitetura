@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orçamento · Marcenaria</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0e0e0e;
+    --white: #fafaf8;
+    --gray-100: #f4f3f0;
+    --gray-200: #e8e6e1;
+    --gray-400: #a09d97;
+    --gray-600: #6b6863;
+    --gray-800: #2e2d2b;
+    --accent: #8b7355;
+    --accent-light: #c4a882;
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--gray-100);
+    color: var(--black);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--black);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-img {
+    height: 36px;
+    width: auto;
+  }
+
+  .header-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--black);
+    padding: 48px 48px 64px;
+    border-bottom: 1px solid #1e1e1c;
+  }
+
+  .hero-kicker {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .hero-title strong {
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    color: var(--gray-400);
+    font-weight: 300;
+    margin-top: 16px;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-600); }
+  .meta-value { font-size: 13px; font-weight: 500; color: var(--gray-200); }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-200);
+  }
+
+  /* ── ITEM CARD ── */
+  .items-stack { display: flex; flex-direction: column; gap: 2px; margin-bottom: 48px; }
+
+  .item-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 2px;
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 20px;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+
+  .item-card:hover { border-color: var(--accent-light); }
+
+  .item-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .item-body { flex: 1; }
+
+  .item-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .item-desc {
+    font-size: 12px;
+    color: var(--gray-600);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .item-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border: 1px solid var(--gray-200);
+  }
+
+  .item-price { text-align: right; flex-shrink: 0; }
+
+  .price-range {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    white-space: nowrap;
+  }
+
+  .price-label {
+    font-size: 10px;
+    color: var(--gray-400);
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+  }
+
+  /* ── RENDER CARD ── */
+  .render-note {
+    background: var(--black);
+    border-radius: 2px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .render-text-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .render-text-sub {
+    font-size: 12px;
+    color: var(--gray-400);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .render-price {
+    text-align: right;
+  }
+
+  .render-price-val {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent-light);
+  }
+
+  .render-price-label {
+    font-size: 10px;
+    color: var(--gray-600);
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+  }
+
+  /* ── TOTAL BOX ── */
+  .total-block { margin-bottom: 48px; }
+
+  .total-rows {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 28px;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 13px;
+  }
+
+  .total-row:last-child { border-bottom: none; }
+
+  .total-row-label { color: var(--gray-600); }
+  .total-row-val { font-weight: 500; color: var(--black); }
+
+  .total-grand {
+    background: var(--black);
+    border-radius: 0 0 2px 2px;
+    padding: 24px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .total-grand-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+
+  .total-grand-val {
+    text-align: right;
+  }
+
+  .grand-range {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .grand-sub {
+    font-size: 11px;
+    color: var(--gray-600);
+    margin-top: 3px;
+  }
+
+  /* ── NOTES ── */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .note-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 2px;
+    padding: 20px 22px;
+  }
+
+  .note-card.accent {
+    background: var(--black);
+    border-color: var(--black);
+  }
+
+  .note-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+
+  .note-card.accent .note-icon {
+    background: #1e1e1c;
+  }
+
+  .note-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 6px;
+    letter-spacing: 0.03em;
+  }
+
+  .note-card.accent .note-title { color: var(--white); }
+
+  .note-text {
+    font-size: 12px;
+    color: var(--gray-600);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .note-card.accent .note-text { color: var(--gray-400); }
+
+  /* ── PAYMENT ── */
+  .payment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 48px;
+    background: var(--gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .payment-step {
+    background: var(--white);
+    padding: 22px 20px;
+    text-align: center;
+  }
+
+  .payment-pct {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.03em;
+  }
+
+  .payment-when {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gray-600);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .payment-desc {
+    font-size: 11px;
+    color: var(--gray-400);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--black);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-validity {
+    font-size: 11px;
+    color: var(--gray-600);
+    font-weight: 300;
+  }
+
+  .footer-cta {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--gray-200);
+    margin: 0 0 48px;
+  }
+
+  @media (max-width: 640px) {
+    .site-header { padding: 20px 24px; }
+    .hero { padding: 32px 24px 48px; }
+    .main { padding: 32px 20px 60px; }
+    .item-card { grid-template-columns: 36px 1fr; }
+    .item-price { grid-column: 2; grid-row: 2; padding-left: 0; }
+    .notes-grid { grid-template-columns: 1fr; }
+    .payment-grid { grid-template-columns: 1fr; }
+    .render-note { grid-template-columns: 1fr; }
+    .footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <img src="https://i.imgur.com/kr9taUL.png" alt="João Siqueira Arquitetura" class="logo-img">
+  <span class="header-label">Orçamento Preliminar</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-kicker">Proposta · Marcenaria Completa</p>
+  <h1 class="hero-title">Projeto de <strong>Marcenaria</strong><br>com Visualização 3D</h1>
+  <p class="hero-sub">Orçamento preliminar com base nas medidas informadas. Os valores finais serão confirmados após a etapa de medição online.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Tipo</span>
+      <span class="meta-value">Residencial</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Itens</span>
+      <span class="meta-value">4 ambientes</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Inclui</span>
+      <span class="meta-value">Renders 3D</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Cliente</span>
+      <span class="meta-value">Isaias</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Localização</span>
+      <span class="meta-value">Espírito Santo</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Validade</span>
+      <span class="meta-value">15 dias</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ITEMS -->
+  <p class="section-title">O que está incluso</p>
+  <div class="items-stack">
+
+    <div class="item-card">
+      <div class="item-num">01</div>
+      <div class="item-body">
+        <p class="item-name">Cozinha completa</p>
+        <p class="item-desc">Projeto de marcenaria para cozinha de aproximadamente 4,09 × 2,5 m — armários superiores e inferiores, balcão, especificação de acabamentos e ferragens.</p>
+        <div class="item-tags">
+          <span class="tag">Cozinha</span>
+          <span class="tag">4,09 × 2,5 m</span>
+          <span class="tag">Armários altos e baixos</span>
+        </div>
+      </div>
+      <div class="item-price">
+        <p class="price-range">R$ 1.600 – R$ 1.900</p>
+        <p class="price-label">projeto</p>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-num">02</div>
+      <div class="item-body">
+        <p class="item-name">Roupeiro com cama embutida</p>
+        <p class="item-desc">Roupeiro de aproximadamente 3,1 m com cama retrátil embutida, nichos e compartimentos de armazenamento.</p>
+        <div class="item-tags">
+          <span class="tag">Quarto</span>
+          <span class="tag">~3,1 m</span>
+          <span class="tag">Cama retrátil</span>
+          <span class="tag">Nichos</span>
+        </div>
+      </div>
+      <div class="item-price">
+        <p class="price-range">R$ 1.200 – R$ 1.500</p>
+        <p class="price-label">projeto</p>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-num">03</div>
+      <div class="item-body">
+        <p class="item-name">Armário sob escada</p>
+        <p class="item-desc">Aproveitamento do vão da escada com marcenaria planejada — interior com divisórias, prateleiras e porta de acesso.</p>
+        <div class="item-tags">
+          <span class="tag">Área comum</span>
+          <span class="tag">Vão de escada</span>
+          <span class="tag">Medição online</span>
+        </div>
+      </div>
+      <div class="item-price">
+        <p class="price-range">R$ 700 – R$ 800</p>
+        <p class="price-label">projeto</p>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-num">04</div>
+      <div class="item-body">
+        <p class="item-name">Painel de TV com espelho</p>
+        <p class="item-desc">Painel para sala de aproximadamente 4,8 m — composição de marcenaria com espelho, nichos e suporte para TV.</p>
+        <div class="item-tags">
+          <span class="tag">Sala</span>
+          <span class="tag">~4,8 m</span>
+          <span class="tag">Espelho</span>
+          <span class="tag">Nichos</span>
+        </div>
+      </div>
+      <div class="item-price">
+        <p class="price-range">R$ 1.300 – R$ 1.300</p>
+        <p class="price-label">projeto</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RENDERS -->
+  <p class="section-title">Visualização 3D</p>
+  <div class="render-note">
+    <div>
+      <p class="render-text-title">Renders de apresentação inclusos</p>
+      <p class="render-text-sub">Cada ambiente recebe imagens fotorrealistas em 3D para você visualizar o resultado antes de contratar o marceneiro. Inclui 2 perspectivas por ambiente.</p>
+    </div>
+    <div class="render-price">
+      <p class="render-price-val">incluso</p>
+      <p class="render-price-label">no valor do projeto</p>
+    </div>
+  </div>
+
+  <!-- TOTAL -->
+  <p class="section-title">Resumo do investimento</p>
+  <div class="total-block">
+    <div class="total-rows">
+      <div class="total-row">
+        <span class="total-row-label">Cozinha completa</span>
+        <span class="total-row-val">R$ 1.600 – R$ 1.900</span>
+      </div>
+      <div class="total-row">
+        <span class="total-row-label">Roupeiro com cama embutida</span>
+        <span class="total-row-val">R$ 1.200 – R$ 1.500</span>
+      </div>
+      <div class="total-row">
+        <span class="total-row-label">Armário sob escada</span>
+        <span class="total-row-val">R$ 700 – R$ 800</span>
+      </div>
+      <div class="total-row">
+        <span class="total-row-label">Painel de TV com espelho</span>
+        <span class="total-row-val">R$ 1.300 – R$ 1.300</span>
+      </div>
+      <div class="total-row">
+        <span class="total-row-label">Visualização 3D (todos os ambientes)</span>
+        <span class="total-row-val" style="color:var(--accent)">incluso</span>
+      </div>
+    </div>
+    <div class="total-grand">
+      <span class="total-grand-label">Total do projeto</span>
+      <div class="total-grand-val">
+        <p class="grand-range">R$ 4.800 – R$ 5.500</p>
+        <p class="grand-sub">Valores confirmados após etapa de medição online</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <p class="section-title">Informações importantes</p>
+  <div class="notes-grid">
+    <div class="note-card">
+      <div class="note-icon">📐</div>
+      <p class="note-title">Valores preliminares</p>
+      <p class="note-text">Este orçamento é baseado nas medidas informadas. Os valores são confirmados com precisão após a etapa de medição online.</p>
+    </div>
+    <div class="note-card">
+      <div class="note-icon">🪞</div>
+      <p class="note-title">O que está incluso</p>
+      <p class="note-text">Projeto técnico de marcenaria, renders 3D para visualização e especificação de materiais para o marceneiro executar.</p>
+    </div>
+    <div class="note-card">
+      <div class="note-icon">🔨</div>
+      <p class="note-title">O que não está incluso</p>
+      <p class="note-text">Execução da marcenaria, materiais, ferragens e instalação. O projeto serve de base para o marceneiro de sua escolha.</p>
+    </div>
+    <div class="note-card accent">
+      <div class="note-icon">✦</div>
+      <p class="note-title">Por que ter um projeto?</p>
+      <p class="note-text">Com projeto em mãos você consegue orçar com vários marceneiros, comparar preços e garantir que o resultado final seja exatamente o que você imaginou.</p>
+    </div>
+  </div>
+
+  <!-- PAYMENT -->
+  <p class="section-title">Como funciona o pagamento</p>
+  <div class="payment-grid">
+    <div class="payment-step">
+      <p class="payment-pct">60%</p>
+      <p class="payment-when">Na assinatura</p>
+      <p class="payment-desc">Entrada para início imediato do projeto</p>
+    </div>
+    <div class="payment-step">
+      <p class="payment-pct">30%</p>
+      <p class="payment-when">Nos renders</p>
+      <p class="payment-desc">Ao entregar as imagens 3D para aprovação</p>
+    </div>
+    <div class="payment-step">
+      <p class="payment-pct">10%</p>
+      <p class="payment-when">Na entrega</p>
+      <p class="payment-desc">Ao receber o projeto executivo com todas as medidas</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <p class="section-title">Próximo passo</p>
+  <div class="note-card" style="border-color: var(--accent-light);">
+    <p class="note-title" style="font-size:14px; margin-bottom:8px;">Gostou da proposta?</p>
+    <p class="note-text" style="font-size:13px;">Entre em contato para começarmos a etapa de medição online.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-validity">Proposta válida por 15 dias · Valores confirmados após medição online</span>
+  <span class="footer-cta">João Siqueira Arquitetura & Interiores</span>
+</footer>
+
+</body>
+</html>
