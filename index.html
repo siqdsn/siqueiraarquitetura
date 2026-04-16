@@ -6,351 +6,389 @@
 <title>Proposta · Yago Rangel · João Siqueira Arquitetura</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0e0e0e;
-    --white: #fafaf8;
-    --gray-100: #f4f3f0;
-    --gray-200: #e8e6e1;
-    --gray-400: #a09d97;
-    --gray-600: #6b6863;
-    --accent: #616a75;
-    --accent-light: #8a96a3;
-    --green: #2d6a4f;
-    --green-light: #e8f5ee;
-    --amber: #7c5c2e;
-    --amber-light: #fdf3e3;
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --black:#0e0e0e;--white:#fafaf8;--g100:#f4f3f0;--g200:#e8e6e1;
+    --g400:#a09d97;--g600:#6b6863;--acc:#616a75;--accl:#8a96a3;
+    --grn:#2d6a4f;--grnl:#e8f5ee;--amb:#7c5c2e;--ambl:#fdf3e3;
   }
-  body { font-family: 'Outfit', sans-serif; background: var(--gray-100); color: var(--black); }
-  .site-header { background: var(--black); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; }
-  .logo-img { height: 34px; width: auto; }
-  .header-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-400); }
-  .hero { background: var(--black); padding: 44px 48px 60px; }
-  .hero-kicker { font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 14px; }
-  .hero-title { font-size: clamp(26px, 4vw, 42px); font-weight: 300; color: var(--white); line-height: 1.15; letter-spacing: -0.02em; }
-  .hero-title strong { font-weight: 600; }
-  .hero-sub { font-size: 13px; color: var(--gray-400); font-weight: 300; margin-top: 16px; max-width: 560px; line-height: 1.8; }
-  .hero-meta { display: flex; gap: 28px; margin-top: 32px; flex-wrap: wrap; }
-  .meta-item { display: flex; flex-direction: column; gap: 4px; }
-  .meta-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-600); }
-  .meta-value { font-size: 13px; font-weight: 500; color: var(--gray-200); }
-  .main { max-width: 920px; margin: 0 auto; padding: 52px 32px 80px; }
-  .section-title { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
-  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
-  .intro-block { background: var(--white); border: 1px solid var(--gray-200); border-radius: 2px; padding: 28px 32px; margin-bottom: 48px; }
-  .intro-text { font-size: 14px; line-height: 1.9; color: var(--gray-600); font-weight: 300; }
-  .intro-text p + p { margin-top: 16px; }
-  .intro-text strong { font-weight: 500; color: var(--black); }
-  .etapas { display: flex; flex-direction: column; gap: 2px; margin-bottom: 48px; }
-  .etapa { background: var(--white); border: 1px solid var(--gray-200); border-radius: 2px; padding: 22px 26px; display: grid; grid-template-columns: 48px 1fr; gap: 18px; align-items: start; }
-  .etapa-num { width: 40px; height: 40px; border-radius: 50%; background: var(--black); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--white); flex-shrink: 0; }
-  .etapa-nome { font-size: 14px; font-weight: 500; margin-bottom: 5px; }
-  .etapa-desc { font-size: 12.5px; color: var(--gray-600); font-weight: 300; line-height: 1.7; }
-  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--gray-200); border-radius: 2px; overflow: hidden; margin-bottom: 48px; }
-  .scope-item { background: var(--white); padding: 20px 22px; }
-  .scope-num { width: 28px; height: 28px; border-radius: 50%; background: var(--black); color: var(--white); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
-  .scope-name { font-size: 13px; font-weight: 500; margin-bottom: 5px; }
-  .scope-desc { font-size: 12px; color: var(--gray-600); font-weight: 300; line-height: 1.6; }
-  .visita-box { background: var(--black); border-radius: 2px; padding: 26px 30px; margin-bottom: 48px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
-  .vb-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
-  .vb-desc { font-size: 12px; color: var(--gray-400); font-weight: 300; line-height: 1.7; }
-  .vb-tag { display: inline-block; margin-top: 10px; font-size: 10px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; background: #1e1e1c; color: var(--accent-light); padding: 4px 12px; border-radius: 999px; }
-  .vb-price { text-align: right; }
-  .vb-val { font-size: 26px; font-weight: 600; color: var(--white); }
-  .vb-sub { font-size: 11px; color: var(--gray-600); margin-top: 4px; }
-  .acomp-box { background: var(--white); border: 1px solid var(--gray-200); border-radius: 2px; overflow: hidden; margin-bottom: 48px; }
-  .acomp-head { padding: 22px 26px; border-bottom: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
-  .acomp-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-  .acomp-sub { font-size: 12px; color: var(--gray-600); font-weight: 300; }
-  .acomp-ph { text-align: right; flex-shrink: 0; }
-  .acomp-pv { font-size: 16px; font-weight: 600; }
-  .acomp-ps { font-size: 10px; color: var(--gray-400); margin-top: 3px; }
-  .acomp-item { display: flex; gap: 10px; padding: 10px 26px; border-bottom: 1px solid var(--gray-200); font-size: 12.5px; color: var(--gray-600); line-height: 1.5; align-items: flex-start; }
-  .acomp-item:last-child { border-bottom: none; }
-  .adot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 6px; }
-  .scenarios { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-  .scenario { border-radius: 2px; overflow: hidden; border: 1px solid var(--gray-200); }
-  .sc-head { padding: 20px 22px 16px; }
-  .sc-badge { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; display: inline-block; margin-bottom: 10px; }
-  .badge-g { background: var(--green-light); color: var(--green); }
-  .badge-a { background: var(--amber-light); color: var(--amber); }
-  .sc-name { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .sc-desc { font-size: 12px; color: var(--gray-600); font-weight: 300; line-height: 1.6; }
-  .sc-items { background: var(--white); }
-  .sc-item { display: flex; gap: 10px; padding: 9px 22px; border-top: 1px solid var(--gray-200); font-size: 12px; color: var(--gray-600); line-height: 1.5; align-items: flex-start; }
-  .si-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
-  .dot-g { background: var(--green); }
-  .dot-a { background: #c9862a; }
-  .dot-gr { background: var(--gray-400); }
-  .sc-price { background: var(--black); padding: 16px 22px; display: flex; justify-content: space-between; align-items: center; }
-  .scp-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-600); }
-  .scp-val { font-size: 18px; font-weight: 600; color: var(--white); }
-  .total-rows { background: var(--white); border: 1px solid var(--gray-200); border-radius: 2px 2px 0 0; overflow: hidden; }
-  .total-row { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 26px; border-bottom: 1px solid var(--gray-200); font-size: 13px; }
-  .total-row:last-child { border-bottom: none; }
-  .tr-l { color: var(--gray-600); }
-  .tr-v { font-weight: 500; }
-  .tr-green { color: var(--green); font-weight: 500; }
-  .total-grand { background: var(--black); padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
-  .tg-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-600); }
-  .tg-label span { display: block; font-size: 10px; color: var(--gray-600); margin-top: 4px; font-weight: 300; letter-spacing: 0; text-transform: none; }
-  .tg-val { font-size: 22px; font-weight: 600; color: var(--white); text-align: right; }
-  .pay-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--gray-200); border-radius: 2px; overflow: hidden; margin-bottom: 48px; }
-  .pay-step { background: var(--white); padding: 22px 18px; text-align: center; }
-  .pay-pct { font-size: 28px; font-weight: 600; color: var(--black); line-height: 1; margin-bottom: 6px; letter-spacing: -0.03em; }
-  .pay-when { font-size: 11px; font-weight: 500; color: var(--gray-600); letter-spacing: 0.05em; margin-bottom: 6px; }
-  .pay-desc { font-size: 11px; color: var(--gray-400); font-weight: 300; line-height: 1.5; }
-  .cta-card { border: 1px solid var(--accent); border-radius: 2px; padding: 22px 26px; margin-bottom: 12px; }
-  .cta-title { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-  .cta-text { font-size: 13px; color: var(--gray-600); font-weight: 300; }
-  .wa-btn { display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--white); color: var(--black); text-decoration: none; border-radius: 2px; padding: 18px 32px; border: 2px solid var(--accent); font-size: 14px; font-weight: 600; letter-spacing: 0.04em; transition: background 0.2s; margin-bottom: 48px; }
-  .wa-btn:hover { background: var(--gray-100); }
-  .divider { height: 1px; background: var(--gray-200); margin: 0 0 48px; }
-  .footer { background: var(--black); padding: 28px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .footer-v { font-size: 11px; color: var(--gray-600); font-weight: 300; }
-  .footer-b { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-light); }
-  @media (max-width: 640px) {
-    .site-header, .hero, .footer { padding-left: 20px; padding-right: 20px; }
-    .main { padding: 32px 16px 60px; }
-    .scope-grid, .scenarios, .pay-grid { grid-template-columns: 1fr; }
-    .visita-box { grid-template-columns: 1fr; }
-    .vb-price { text-align: left; }
-    .acomp-head { flex-direction: column; }
-    .acomp-ph { text-align: left; }
-    .etapa { grid-template-columns: 40px 1fr; }
+  body{font-family:'Outfit',sans-serif;background:var(--g100);color:var(--black)}
+
+  /* HEADER */
+  .hdr{background:var(--black);padding:22px 48px;display:flex;align-items:center;justify-content:space-between}
+  .logo{height:33px;width:auto}
+  .hdr-lbl{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g400)}
+
+  /* HERO */
+  .hero{background:var(--black);padding:42px 48px 56px}
+  .kicker{font-size:10px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--accl);margin-bottom:12px}
+  .h1{font-size:clamp(24px,4vw,40px);font-weight:300;color:var(--white);line-height:1.15;letter-spacing:-.02em}
+  .h1 strong{font-weight:600}
+  .hero-sub{font-size:13px;color:var(--g400);font-weight:300;margin-top:14px;max-width:500px;line-height:1.75}
+  .meta{display:flex;gap:26px;margin-top:28px;flex-wrap:wrap}
+  .mi{display:flex;flex-direction:column;gap:3px}
+  .ml{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--g600)}
+  .mv{font-size:13px;font-weight:500;color:var(--g200)}
+
+  /* MAIN */
+  .main{max-width:920px;margin:0 auto;padding:50px 32px 80px}
+  .stitle{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .stitle::after{content:'';flex:1;height:1px;background:var(--g200)}
+
+  /* INTRO CURTO */
+  .intro{background:var(--white);border:1px solid var(--g200);border-radius:2px;padding:24px 28px;margin-bottom:46px}
+  .intro p{font-size:13.5px;line-height:1.85;color:var(--g600);font-weight:300}
+  .intro p strong{font-weight:500;color:var(--black)}
+
+  /* PROCESSO — VISUAL */
+  .processo{margin-bottom:46px}
+  .proc-steps{display:flex;flex-direction:column;gap:0}
+  .proc-step{display:grid;grid-template-columns:56px 1fr;background:var(--white);border:1px solid var(--g200);border-bottom:none}
+  .proc-step:first-child{border-radius:2px 2px 0 0}
+  .proc-step:last-child{border-bottom:1px solid var(--g200);border-radius:0 0 2px 2px}
+  .ps-left{background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px 0 0}
+  .ps-num{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--acc);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--accl)}
+  .ps-line{width:1px;flex:1;background:var(--acc);opacity:.3;margin-top:8px;margin-bottom:0}
+  .proc-step:last-child .ps-line{display:none}
+  .ps-right{padding:18px 22px 20px}
+  .ps-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}
+  .ps-title{font-size:14px;font-weight:500;margin-bottom:5px}
+  .ps-desc{font-size:12px;color:var(--g600);font-weight:300;line-height:1.65}
+  .ps-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+  .chip{font-size:10px;padding:2px 9px;border-radius:999px;background:var(--g100);color:var(--g600);border:1px solid var(--g200)}
+
+  /* ENTREGÁVEIS */
+  .scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--g200);border-radius:2px;overflow:hidden;margin-bottom:46px}
+  .sc-item{background:var(--white);padding:18px 20px}
+  .sc-num{width:26px;height:26px;border-radius:50%;background:var(--black);color:var(--white);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:9px}
+  .sc-name{font-size:13px;font-weight:500;margin-bottom:4px}
+  .sc-desc{font-size:11.5px;color:var(--g600);font-weight:300;line-height:1.6}
+
+  /* VISITA */
+  .visita{background:var(--black);border-radius:2px;padding:24px 28px;margin-bottom:46px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px}
+  .vt-title{font-size:14px;font-weight:500;color:var(--white);margin-bottom:5px}
+  .vt-desc{font-size:12px;color:var(--g400);font-weight:300;line-height:1.65}
+  .vt-tag{display:inline-block;margin-top:9px;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;background:#1e1e1c;color:var(--accl);padding:3px 10px;border-radius:999px}
+  .vt-price{text-align:right}
+  .vt-val{font-size:24px;font-weight:600;color:var(--white)}
+  .vt-sub{font-size:10px;color:var(--g600);margin-top:3px}
+
+  /* ACOMPANHAMENTO */
+  .acomp{background:var(--white);border:1px solid var(--g200);border-radius:2px;overflow:hidden;margin-bottom:46px}
+  .ac-head{padding:20px 24px;border-bottom:1px solid var(--g200);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+  .ac-title{font-size:14px;font-weight:500;margin-bottom:3px}
+  .ac-sub{font-size:12px;color:var(--g600);font-weight:300}
+  .ac-ph{text-align:right;flex-shrink:0}
+  .ac-pv{font-size:16px;font-weight:600}
+  .ac-ps{font-size:10px;color:var(--g400);margin-top:2px}
+  .ac-item{display:flex;gap:9px;padding:9px 24px;border-bottom:1px solid var(--g200);font-size:12.5px;color:var(--g600);line-height:1.5;align-items:flex-start}
+  .ac-item:last-child{border-bottom:none}
+  .adot{width:5px;height:5px;border-radius:50%;background:var(--acc);flex-shrink:0;margin-top:6px}
+
+  /* CENÁRIOS */
+  .scenarios{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+  .scenario{border-radius:2px;overflow:hidden;border:1px solid var(--g200)}
+  .sch{padding:18px 20px 14px}
+  .sc-badge{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:9px}
+  .bg{background:var(--grnl);color:var(--grn)}
+  .ba{background:var(--ambl);color:var(--amb)}
+  .sc-n{font-size:14px;font-weight:500;margin-bottom:5px}
+  .sc-d{font-size:12px;color:var(--g600);font-weight:300;line-height:1.6}
+  .sc-list{background:var(--white)}
+  .sl-item{display:flex;gap:9px;padding:8px 20px;border-top:1px solid var(--g200);font-size:12px;color:var(--g600);line-height:1.5;align-items:flex-start}
+  .sd{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px}
+  .dg{background:var(--grn)}.da{background:#c9862a}.dgr{background:var(--g400)}
+  .sc-pr{background:var(--black);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+  .spl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--g600)}
+  .spv{font-size:18px;font-weight:600;color:var(--white)}
+
+  /* TOTAL */
+  .t-rows{background:var(--white);border:1px solid var(--g200);border-radius:2px 2px 0 0;overflow:hidden}
+  .t-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 24px;border-bottom:1px solid var(--g200);font-size:13px}
+  .t-row:last-child{border-bottom:none}
+  .trl{color:var(--g600)}.trv{font-weight:500}.trg{color:var(--grn);font-weight:500}
+  .t-grand{background:var(--black);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+  .tgl{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g600)}
+  .tgl span{display:block;font-size:10px;color:var(--g600);margin-top:3px;font-weight:300;letter-spacing:0;text-transform:none}
+  .tgv{font-size:22px;font-weight:600;color:var(--white);text-align:right}
+
+  /* PAGAMENTO */
+  .pay{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--g200);border-radius:2px;overflow:hidden;margin-bottom:46px}
+  .ps{background:var(--white);padding:20px 16px;text-align:center}
+  .pp{font-size:26px;font-weight:600;color:var(--black);line-height:1;margin-bottom:5px;letter-spacing:-.03em}
+  .pw{font-size:11px;font-weight:500;color:var(--g600);letter-spacing:.05em;margin-bottom:5px}
+  .pd{font-size:11px;color:var(--g400);font-weight:300;line-height:1.5}
+
+  /* CTA */
+  .cta-card{border:1px solid var(--acc);border-radius:2px;padding:20px 24px;margin-bottom:10px}
+  .cta-t{font-size:14px;font-weight:500;margin-bottom:5px}
+  .cta-d{font-size:13px;color:var(--g600);font-weight:300}
+  .wa{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--white);color:var(--black);text-decoration:none;border-radius:2px;padding:17px 32px;border:2px solid var(--acc);font-size:14px;font-weight:600;letter-spacing:.04em;transition:background .2s;margin-bottom:46px}
+  .wa:hover{background:var(--g100)}
+
+  .divider{height:1px;background:var(--g200);margin:0 0 46px}
+  .footer{background:var(--black);padding:26px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .fv{font-size:11px;color:var(--g600);font-weight:300}
+  .fb{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--accl)}
+
+  @media(max-width:640px){
+    .hdr,.hero,.footer{padding-left:20px;padding-right:20px}
+    .main{padding:32px 16px 60px}
+    .scope-grid,.scenarios,.pay{grid-template-columns:1fr}
+    .visita{grid-template-columns:1fr}
+    .vt-price{text-align:left}
+    .ac-head{flex-direction:column}
+    .ac-ph{text-align:left}
   }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <img src="https://i.imgur.com/kr9taUL.png" alt="João Siqueira Arquitetura" class="logo-img">
-  <span class="header-label">Proposta de Projeto</span>
+<header class="hdr">
+  <img src="https://i.imgur.com/kr9taUL.png" alt="João Siqueira Arquitetura" class="logo">
+  <span class="hdr-lbl">Proposta de Projeto</span>
 </header>
 
 <section class="hero">
-  <p class="hero-kicker">Projeto de Arquitetura · Reforma Residencial</p>
-  <h1 class="hero-title">A casa que você <strong>imagina</strong><br>começa no projeto</h1>
-  <p class="hero-sub">Antes de qualquer obra, existe um processo de escuta, estudo e planejamento. É esse processo que garante que o resultado final seja exatamente o que você quer — sem surpresas, sem retrabalho e sem desperdício.</p>
-  <div class="hero-meta">
-    <div class="meta-item"><span class="meta-label">Cliente</span><span class="meta-value">Yago Rangel</span></div>
-    <div class="meta-item"><span class="meta-label">Localização</span><span class="meta-value">Heliópolis · Belford Roxo</span></div>
-    <div class="meta-item"><span class="meta-label">Área</span><span class="meta-value">~96 m² de terreno</span></div>
-    <div class="meta-item"><span class="meta-label">Pavimentos</span><span class="meta-value">Térreo + Superior</span></div>
-    <div class="meta-item"><span class="meta-label">Validade</span><span class="meta-value">15 dias</span></div>
+  <p class="kicker">Projeto de Arquitetura · Reforma Residencial</p>
+  <h1 class="h1">A casa que você <strong>imagina</strong><br>começa no projeto</h1>
+  <p class="hero-sub">Dois pavimentos, dois cenários de intervenção, um processo completo do levantamento ao projeto executivo — para que a obra aconteça sem improviso.</p>
+  <div class="meta">
+    <div class="mi"><span class="ml">Arquiteto</span><span class="mv">João Siqueira</span></div>
+    <div class="mi"><span class="ml">Cliente</span><span class="mv">Yago Rangel</span></div>
+    <div class="mi"><span class="ml">Localização</span><span class="mv">Heliópolis · Belford Roxo</span></div>
+    <div class="mi"><span class="ml">Área</span><span class="mv">~96 m² · 2 pavimentos</span></div>
+    <div class="mi"><span class="ml">Validade</span><span class="mv">15 dias</span></div>
   </div>
 </section>
 
 <main class="main">
 
-  <p class="section-title">Sobre o projeto</p>
-  <div class="intro-block">
-    <div class="intro-text">
-      <p>Sua casa tem dois pavimentos com usos bem distintos — no térreo, um espaço de convivência com área gourmet, banheiro e garagem; no superior, os ambientes privados com quartos, cozinha, sala e escritório. Esse é exatamente o tipo de imóvel que se beneficia de um projeto de arquitetura pensado com cuidado: cada decisão no térreo interfere no superior, e o contrário também é verdade.</p>
-      <p>O projeto de arquitetura que vou desenvolver para você <strong>não é apenas um conjunto de plantas</strong>. É um documento técnico completo que vai guiar cada etapa da obra — desde a escolha dos materiais até a posição de cada ponto de luz. O empreiteiro terá tudo que precisa para executar sem improvisar, e você terá controle total sobre o que está sendo feito.</p>
-      <p>Trabalho com <strong>dois cenários de intervenção</strong>: um que preserva a estrutura atual e foca na transformação visual e funcional dos espaços, e outro que inclui demolição e readequação de layout para quem quer mudar a distribuição dos ambientes. A escolha entre os dois será definida juntos, após a visita técnica ao imóvel.</p>
+  <!-- INTRO CURTO -->
+  <p class="stitle">Sobre o projeto</p>
+  <div class="intro">
+    <p>Sua casa tem dois pavimentos com usos distintos — térreo de convivência com área gourmet, banheiro e garagem; superior com os ambientes privados. Um projeto desse porte exige coordenação entre pavimentos, complementares integrados e um documento técnico que o empreiteiro possa executar sem precisar improvisar. É isso que este projeto entrega.</p>
+  </div>
+
+  <!-- PROCESSO VISUAL -->
+  <p class="stitle">Como o projeto acontece</p>
+  <div class="processo">
+    <div class="proc-steps">
+
+      <div class="proc-step">
+        <div class="ps-left">
+          <div class="ps-num">01</div>
+          <div class="ps-line"></div>
+        </div>
+        <div class="ps-right">
+          <p class="ps-tag">Visita técnica</p>
+          <p class="ps-title">Levantamento do imóvel</p>
+          <p class="ps-desc">Medição completa dos dois pavimentos, registro fotográfico, diagnóstico da estrutura e instalações. Definimos juntos qual cenário de reforma faz mais sentido.</p>
+          <div class="ps-chips"><span class="chip">Presencial</span><span class="chip">Trena + croqui</span><span class="chip">Diagnóstico incluso</span></div>
+        </div>
+      </div>
+
+      <div class="proc-step">
+        <div class="ps-left">
+          <div class="ps-num">02</div>
+          <div class="ps-line"></div>
+        </div>
+        <div class="ps-right">
+          <p class="ps-tag">Estudo preliminar</p>
+          <p class="ps-title">Layout e conceito</p>
+          <p class="ps-desc">Primeiro esboço com a distribuição dos ambientes, fluxos e conceito visual. Você revisa e aprova antes de qualquer avanço. Nada segue sem o seu acordo.</p>
+          <div class="ps-chips"><span class="chip">Aprovação do cliente</span><span class="chip">2 rodadas de revisão</span></div>
+        </div>
+      </div>
+
+      <div class="proc-step">
+        <div class="ps-left">
+          <div class="ps-num">03</div>
+          <div class="ps-line"></div>
+        </div>
+        <div class="ps-right">
+          <p class="ps-tag">Visualização</p>
+          <p class="ps-title">Imagens 3D fotorrealistas</p>
+          <p class="ps-desc">Renders dos principais ambientes para você ver exatamente o resultado — materiais, iluminação, marcenaria, cores — antes da obra começar.</p>
+          <div class="ps-chips"><span class="chip">Todos os ambientes</span><span class="chip">2 perspectivas por ambiente</span></div>
+        </div>
+      </div>
+
+      <div class="proc-step">
+        <div class="ps-left">
+          <div class="ps-num">04</div>
+          <div class="ps-line"></div>
+        </div>
+        <div class="ps-right">
+          <p class="ps-tag">Projeto executivo</p>
+          <p class="ps-title">Documento técnico completo</p>
+          <p class="ps-desc">Todas as plantas, elétrica, iluminação, marcenaria, especificações e quantitativo de materiais. O empreiteiro executa a partir daqui, sem precisar decidir nada por conta.</p>
+          <div class="ps-chips"><span class="chip">PDF + DWG</span><span class="chip">Quantitativo de materiais</span><span class="chip">Pronto para orçar a obra</span></div>
+        </div>
+      </div>
+
+      <div class="proc-step">
+        <div class="ps-left">
+          <div class="ps-num">05</div>
+          <div class="ps-line"></div>
+        </div>
+        <div class="ps-right">
+          <p class="ps-tag">Pós-projeto</p>
+          <p class="ps-title">Indicação de fornecedores</p>
+          <p class="ps-desc">Indicação de marceneiros, eletricistas e fornecedores de revestimento alinhados ao projeto. Você não precisa montar a equipe de obra do zero.</p>
+          <div class="ps-chips"><span class="chip">Marceneiros</span><span class="chip">Eletricistas</span><span class="chip">Fornecedores de material</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <p class="section-title">Como o projeto acontece</p>
-  <div class="etapas">
-    <div class="etapa">
-      <div class="etapa-num">01</div>
-      <div>
-        <p class="etapa-nome">Visita técnica e levantamento</p>
-        <p class="etapa-desc">Vou ao imóvel para medir todos os ambientes, registrar o estado atual da casa, identificar pontos de atenção e entender como você usa o espaço hoje. É nesse momento que definimos juntos qual cenário de reforma faz mais sentido para o seu caso.</p>
-      </div>
-    </div>
-    <div class="etapa">
-      <div class="etapa-num">02</div>
-      <div>
-        <p class="etapa-nome">Estudo preliminar e aprovação</p>
-        <p class="etapa-desc">Desenvolvo a primeira proposta de layout — a distribuição dos ambientes, os fluxos de circulação e o conceito visual. Você revisa, opina e aprovamos juntos antes de avançar qualquer etapa. Nada é definido sem o seu acordo.</p>
-      </div>
-    </div>
-    <div class="etapa">
-      <div class="etapa-num">03</div>
-      <div>
-        <p class="etapa-nome">Imagens 3D fotorrealistas</p>
-        <p class="etapa-desc">Com o layout aprovado, produzo renders fotorrealistas dos principais ambientes. Você vai ver exatamente como vai ficar — cores, materiais, marcenaria, iluminação — antes de qualquer tijolo ser mexido.</p>
-      </div>
-    </div>
-    <div class="etapa">
-      <div class="etapa-num">04</div>
-      <div>
-        <p class="etapa-nome">Projeto executivo completo</p>
-        <p class="etapa-desc">O documento técnico final com todas as plantas, projetos de elétrica, iluminação, marcenaria e especificações. É o que o empreiteiro vai usar para executar a obra. Inclui também o quantitativo de materiais para você já sair orçando a execução.</p>
-      </div>
-    </div>
-    <div class="etapa">
-      <div class="etapa-num">05</div>
-      <div>
-        <p class="etapa-nome">Indicação de fornecedores</p>
-        <p class="etapa-desc">Ao longo do projeto indico marceneiros, eletricistas, instaladores e fornecedores de revestimento alinhados ao projeto e à região. Você não precisa montar sua equipe de obra do zero.</p>
-      </div>
-    </div>
-  </div>
-
-  <p class="section-title">O que o projeto entrega</p>
+  <!-- ENTREGÁVEIS -->
+  <p class="stitle">O que o projeto entrega</p>
   <div class="scope-grid">
-    <div class="scope-item">
-      <div class="scope-num">01</div>
-      <p class="scope-name">Plantas baixas</p>
-      <p class="scope-desc">Layout dos dois pavimentos com cotas, mobiliário, circulações e indicações de obra para execução.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">02</div>
-      <p class="scope-name">Projeto elétrico</p>
-      <p class="scope-desc">Distribuição de pontos de tomada, iluminação e circuitos para execução pelo eletricista.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">03</div>
-      <p class="scope-name">Projeto de iluminação</p>
-      <p class="scope-desc">Posicionamento e tipo de luminárias por ambiente, com especificação técnica completa.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">04</div>
-      <p class="scope-name">Revestimentos e tintas</p>
-      <p class="scope-desc">Especificação de pisos, azulejos e tintas com referências de produto e fabricante para cada ambiente.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">05</div>
-      <p class="scope-name">Marcenaria planejada</p>
-      <p class="scope-desc">Desenho técnico de toda a marcenaria — cozinha, roupeiros, painéis, nichos e demais móveis sob medida.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">06</div>
-      <p class="scope-name">Imagens 3D realistas</p>
-      <p class="scope-desc">Renders fotorrealistas dos ambientes principais para visualizar o resultado final antes de qualquer obra.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">07</div>
-      <p class="scope-name">Dimensionamento de materiais</p>
-      <p class="scope-desc">Quantitativo de pisos, revestimentos e principais insumos para facilitar o orçamento da execução.</p>
-    </div>
-    <div class="scope-item">
-      <div class="scope-num">08</div>
-      <p class="scope-name">Indicação de fornecedores</p>
-      <p class="scope-desc">Sugestão de marceneiros, eletricistas e fornecedores de material alinhados ao projeto e à região.</p>
+    <div class="sc-item"><div class="sc-num">01</div><p class="sc-name">Plantas baixas</p><p class="sc-desc">Layout dos dois pavimentos com cotas, mobiliário, circulações e indicações de obra.</p></div>
+    <div class="sc-item"><div class="sc-num">02</div><p class="sc-name">Projeto elétrico</p><p class="sc-desc">Pontos de tomada, iluminação e circuitos para execução pelo eletricista.</p></div>
+    <div class="sc-item"><div class="sc-num">03</div><p class="sc-name">Projeto de iluminação</p><p class="sc-desc">Posicionamento e tipo de luminárias por ambiente, com especificação técnica.</p></div>
+    <div class="sc-item"><div class="sc-num">04</div><p class="sc-name">Revestimentos e tintas</p><p class="sc-desc">Especificação de pisos, azulejos e tintas com referência de produto e fabricante.</p></div>
+    <div class="sc-item"><div class="sc-num">05</div><p class="sc-name">Marcenaria planejada</p><p class="sc-desc">Desenho técnico de cozinha, roupeiros, painéis e demais móveis sob medida.</p></div>
+    <div class="sc-item"><div class="sc-num">06</div><p class="sc-name">Imagens 3D realistas</p><p class="sc-desc">Renders fotorrealistas dos ambientes principais antes de qualquer obra.</p></div>
+    <div class="sc-item"><div class="sc-num">07</div><p class="sc-name">Dimensionamento de materiais</p><p class="sc-desc">Quantitativo de pisos, revestimentos e insumos para orçar a execução.</p></div>
+    <div class="sc-item"><div class="sc-num">08</div><p class="sc-name">Indicação de fornecedores</p><p class="sc-desc">Marceneiros, eletricistas e fornecedores de material alinhados ao projeto.</p></div>
+  </div>
+
+  <!-- VISITA -->
+  <div style="background:var(--g200);border-radius:2px;padding:14px 20px;margin-bottom:46px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:var(--black);color:var(--accl);padding:3px 10px;border-radius:999px;white-space:nowrap">Adendo</span>
+      <p style="font-size:12.5px;color:var(--g600);font-weight:300">A visita inicial para levantamento de medidas é cobrada separadamente no valor de <strong style="font-weight:500;color:var(--black)">R$ 250,00</strong>, agendada antes do início do projeto.</p>
     </div>
   </div>
 
-  <p class="section-title">Visita técnica</p>
-  <div class="visita-box">
-    <div>
-      <p class="vb-title">Visita técnica presencial — ponto de partida do projeto</p>
-      <p class="vb-desc">A visita é cobrada como etapa inicial de diagnóstico. Caso o projeto seja contratado na sequência, esse valor é integralmente descontado do total. O projeto inclui mais 3 visitas técnicas ao longo da execução para acompanhar o andamento.</p>
-      <span class="vb-tag">Descontada na contratação do projeto</span>
-    </div>
-    <div class="vb-price">
-      <p class="vb-val">R$ 250,00</p>
-      <p class="vb-sub">visita de diagnóstico</p>
-    </div>
-  </div>
-
-  <p class="section-title">Acompanhamento de obra</p>
-  <div class="acomp-box">
-    <div class="acomp-head">
+  <!-- ACOMPANHAMENTO -->
+  <p class="stitle">Acompanhamento de obra</p>
+  <div class="acomp">
+    <div class="ac-head">
       <div>
-        <p class="acomp-title">Gerenciamento semanal durante a execução</p>
-        <p class="acomp-sub">Contratado separadamente após entrega do projeto · 1 visita por semana</p>
+        <p class="ac-title">Gerenciamento semanal durante a execução</p>
+        <p class="ac-sub">Contratado separadamente · 1 visita por semana · deslocamento incluso</p>
       </div>
-      <div class="acomp-ph">
-        <p class="acomp-pv">R$ 320,00 / visita</p>
-        <p class="acomp-ps">deslocamento incluso</p>
+      <div class="ac-ph">
+        <p class="ac-pv">R$ 320,00 / visita</p>
+        <p class="ac-ps">contratado separadamente</p>
       </div>
     </div>
-    <div class="acomp-item"><div class="adot"></div><span>Visita semanal para verificar se a execução está em conformidade com o projeto</span></div>
-    <div class="acomp-item"><div class="adot"></div><span>Relatório fotográfico enviado após cada visita com pendências e próximos passos</span></div>
-    <div class="acomp-item"><div class="adot"></div><span>Coordenação entre os fornecedores para evitar conflitos de sequência na obra</span></div>
-    <div class="acomp-item"><div class="adot"></div><span>Atendimento remoto contínuo via WhatsApp durante toda a execução</span></div>
-    <div class="acomp-item"><div class="adot"></div><span>Aprovação de materiais e amostras antes da aplicação em obra</span></div>
-    <div class="acomp-item"><div class="adot"></div><span>Vistoria final com checklist completo de conformidade na entrega</span></div>
+    <div class="ac-item"><div class="adot"></div><span>Visita semanal verificando conformidade com o projeto</span></div>
+    <div class="ac-item"><div class="adot"></div><span>Relatório fotográfico após cada visita com pendências e próximos passos</span></div>
+    <div class="ac-item"><div class="adot"></div><span>Coordenação entre fornecedores para evitar conflitos de sequência</span></div>
+    <div class="ac-item"><div class="adot"></div><span>Atendimento remoto contínuo via WhatsApp durante toda a execução</span></div>
+    <div class="ac-item"><div class="adot"></div><span>Aprovação de materiais e amostras antes da aplicação</span></div>
+    <div class="ac-item"><div class="adot"></div><span>Vistoria final com checklist completo de conformidade</span></div>
   </div>
 
-  <p class="section-title">Dois cenários de reforma</p>
+  <!-- CENÁRIOS -->
+  <p class="stitle">Dois cenários de reforma</p>
   <div class="scenarios">
     <div class="scenario">
-      <div class="sc-head" style="background: var(--green-light);">
-        <span class="sc-badge badge-g">Cenário A</span>
-        <p class="sc-name">Reforma sem demolição</p>
-        <p class="sc-desc">Mantém a estrutura e a distribuição atual. Foco total na transformação visual e funcional — revestimentos, instalações, marcenaria e acabamentos.</p>
+      <div class="sch" style="background:var(--grnl)">
+        <span class="sc-badge bg">Cenário A</span>
+        <p class="sc-n">Reforma sem demolição</p>
+        <p class="sc-d">Mantém a estrutura e distribuição atual. Foco na transformação visual e funcional — revestimentos, instalações, marcenaria e acabamentos.</p>
       </div>
-      <div class="sc-items">
-        <div class="sc-item"><div class="si-dot dot-g"></div><span>Troca de pisos e revestimentos em todos os ambientes</span></div>
-        <div class="sc-item"><div class="si-dot dot-g"></div><span>Atualização das instalações elétricas e de iluminação</span></div>
-        <div class="sc-item"><div class="si-dot dot-g"></div><span>Marcenaria planejada em todos os ambientes</span></div>
-        <div class="sc-item"><div class="si-dot dot-g"></div><span>Repaginação completa da área gourmet e banheiro</span></div>
-        <div class="sc-item"><div class="si-dot dot-g"></div><span>Pintura de tetos, paredes internas e fachada</span></div>
-        <div class="sc-item"><div class="si-dot dot-gr"></div><span style="color:var(--gray-400)">Layout e estrutura preservados</span></div>
+      <div class="sc-list">
+        <div class="sl-item"><div class="sd dg"></div><span>Troca de pisos e revestimentos em todos os ambientes</span></div>
+        <div class="sl-item"><div class="sd dg"></div><span>Atualização das instalações elétricas e de iluminação</span></div>
+        <div class="sl-item"><div class="sd dg"></div><span>Marcenaria planejada em todos os ambientes</span></div>
+        <div class="sl-item"><div class="sd dg"></div><span>Repaginação da área gourmet, banheiro e garagem</span></div>
+        <div class="sl-item"><div class="sd dg"></div><span>Pintura completa — tetos, paredes e fachada</span></div>
+        <div class="sl-item"><div class="sd dgr"></div><span style="color:var(--g400)">Layout e estrutura preservados</span></div>
       </div>
-      <div class="sc-price">
-        <div><p class="scp-label">Projeto · Cenário A</p></div>
-        <p class="scp-val">R$ 3.800 – R$ 4.800</p>
+      <div class="sc-pr">
+        <p class="spl">Projeto · Cenário A</p>
+        <p class="spv">R$ 7.000 – R$ 8.000</p>
       </div>
     </div>
     <div class="scenario">
-      <div class="sc-head" style="background: var(--amber-light);">
-        <span class="sc-badge badge-a">Cenário B</span>
-        <p class="sc-name">Reforma com demolição</p>
-        <p class="sc-desc">Inclui readequação de layout com demolição de vedações, reorganização dos ambientes e maior liberdade para personalizar a distribuição dos espaços.</p>
+      <div class="sch" style="background:var(--ambl)">
+        <span class="sc-badge ba">Cenário B</span>
+        <p class="sc-n">Reforma com demolição</p>
+        <p class="sc-d">Inclui readequação de layout, demolição de vedações e reorganização dos ambientes para maximizar o aproveitamento do espaço.</p>
       </div>
-      <div class="sc-items">
-        <div class="sc-item"><div class="si-dot dot-a"></div><span>Tudo do Cenário A, mais:</span></div>
-        <div class="sc-item"><div class="si-dot dot-a"></div><span>Projeto de demolição e novo layout dos dois pavimentos</span></div>
-        <div class="sc-item"><div class="si-dot dot-a"></div><span>Readequação das instalações hidráulicas ao novo layout</span></div>
-        <div class="sc-item"><div class="si-dot dot-a"></div><span>Integração ou separação de ambientes conforme necessidade</span></div>
-        <div class="sc-item"><div class="si-dot dot-a"></div><span>Maior potencial de transformação e personalização do espaço</span></div>
-        <div class="sc-item"><div class="si-dot dot-gr"></div><span style="color:var(--gray-400)">ART estrutural de engenheiro cobrada à parte se necessário</span></div>
+      <div class="sc-list">
+        <div class="sl-item"><div class="sd da"></div><span>Tudo do Cenário A, mais:</span></div>
+        <div class="sl-item"><div class="sd da"></div><span>Projeto de demolição e novo layout dos dois pavimentos</span></div>
+        <div class="sl-item"><div class="sd da"></div><span>Readequação das instalações hidráulicas ao novo layout</span></div>
+        <div class="sl-item"><div class="sd da"></div><span>Integração ou separação de ambientes conforme briefing</span></div>
+        <div class="sl-item"><div class="sd da"></div><span>Maior potencial de personalização do espaço</span></div>
+        <div class="sl-item"><div class="sd dgr"></div><span style="color:var(--g400)">ART estrutural de engenheiro cobrada à parte se necessário</span></div>
       </div>
-      <div class="sc-price">
-        <div><p class="scp-label">Projeto · Cenário B</p></div>
-        <p class="scp-val">R$ 5.200 – R$ 6.500</p>
+      <div class="sc-pr">
+        <p class="spl">Projeto · Cenário B</p>
+        <p class="spv">R$ 10.000 – R$ 11.000</p>
       </div>
     </div>
   </div>
 
-  <div class="total-rows" style="margin-top:12px;">
-    <div class="total-row"><span class="tr-l">Visita técnica de diagnóstico</span><span class="tr-v">R$ 250,00</span></div>
-    <div class="total-row"><span class="tr-l">Desconto ao contratar o projeto</span><span class="tr-green">– R$ 250,00</span></div>
-    <div class="total-row"><span class="tr-l">Acompanhamento de obra (semanal)</span><span class="tr-v">R$ 320,00 / visita</span></div>
+  <!-- TOTAL -->
+  <div class="t-rows" style="margin-top:10px">
+    <div class="t-row"><span class="trl">Projeto completo — Cenário A</span><span class="trv">R$ 7.000 – R$ 8.000</span></div>
+    <div class="t-row"><span class="trl">Projeto completo — Cenário B</span><span class="trv">R$ 10.000 – R$ 11.000</span></div>
+    <div class="t-row"><span class="trl">Acompanhamento de obra (semanal)</span><span class="trv">R$ 320,00 / visita</span></div>
   </div>
-  <div class="total-grand">
-    <div><p class="tg-label">Total — Cenário A <span>Reforma sem demolição · visita descontada</span></p></div>
-    <p class="tg-val">R$ 3.550 – R$ 4.550</p>
+  <div class="t-grand">
+    <div><p class="tgl">Cenário A<span>Reforma sem demolição</span></p></div>
+    <p class="tgv">R$ 7.000 – R$ 8.000</p>
   </div>
-  <div class="total-grand" style="margin-top:2px; margin-bottom:48px;">
-    <div><p class="tg-label">Total — Cenário B <span>Reforma com demolição · visita descontada</span></p></div>
-    <p class="tg-val">R$ 4.950 – R$ 6.250</p>
+  <div class="t-grand" style="margin-top:2px;margin-bottom:16px">
+    <div><p class="tgl">Cenário B<span>Reforma com demolição</span></p></div>
+    <p class="tgv">R$ 10.000 – R$ 11.000</p>
   </div>
 
-  <p class="section-title">Como funciona o pagamento</p>
-  <div class="pay-grid">
-    <div class="pay-step">
-      <p class="pay-pct">50%</p>
-      <p class="pay-when">Na assinatura</p>
-      <p class="pay-desc">Entrada para início imediato do projeto</p>
+  <!-- FORMAS DE PAGAMENTO -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:46px">
+    <div style="background:var(--white);border:1px solid var(--g200);border-radius:2px;padding:20px 22px">
+      <p style="font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">PIX · À vista</p>
+      <p style="font-size:26px;font-weight:600;color:var(--black);letter-spacing:-.02em;line-height:1;margin-bottom:6px">5% OFF</p>
+      <p style="font-size:12px;color:var(--g600);font-weight:300;line-height:1.6">Desconto aplicado sobre o valor total ao pagar via PIX. Cenário A a partir de <strong style="font-weight:500;color:var(--black)">R$ 6.650</strong>.</p>
     </div>
-    <div class="pay-step">
-      <p class="pay-pct">30%</p>
-      <p class="pay-when">Nos renders 3D</p>
-      <p class="pay-desc">Ao entregar as imagens para aprovação</p>
+    <div style="background:var(--white);border:1px solid var(--g200);border-radius:2px;padding:20px 22px">
+      <p style="font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--acc);margin-bottom:10px">Cartão de crédito</p>
+      <p style="font-size:26px;font-weight:600;color:var(--black);letter-spacing:-.02em;line-height:1;margin-bottom:6px">12× sem juros</p>
+      <p style="font-size:12px;color:var(--g600);font-weight:300;line-height:1.6">Parcelamento em até 12 vezes sem acréscimo. Cenário A a partir de <strong style="font-weight:500;color:var(--black)">R$ 583/mês</strong>.</p>
     </div>
-    <div class="pay-step">
-      <p class="pay-pct">20%</p>
-      <p class="pay-when">Na entrega</p>
-      <p class="pay-desc">Arquivos executivos liberados após pagamento final</p>
+  </div>
+
+  <!-- PAGAMENTO ETAPAS -->
+  <p class="stitle">Etapas de pagamento</p>
+  <div class="pay">
+    <div class="ps"><p class="pp">50%</p><p class="pw">Na assinatura</p><p class="pd">Entrada para início imediato do projeto</p></div>
+    <div class="ps"><p class="pp">30%</p><p class="pw">Nos renders 3D</p><p class="pd">Ao entregar as imagens para aprovação</p></div>
+    <div class="ps"><p class="pp">20%</p><p class="pw">Na entrega</p><p class="pd">Arquivos executivos liberados após pagamento final</p></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ARQUITETO -->
+  <p class="stitle">Quem assina o projeto</p>
+  <div style="background:var(--white);border:1px solid var(--g200);border-radius:2px;padding:28px;display:grid;grid-template-columns:100px 1fr;gap:24px;align-items:start;margin-bottom:46px">
+    <img src="https://static.wixstatic.com/media/5b6f55_99c77de595cb4ebfa65abcc1b9558b87~mv2.jpg/v1/fill/w_459,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/5b6f55_99c77de595cb4ebfa65abcc1b9558b87~mv2.jpg" alt="João Siqueira" style="width:100px;height:100px;border-radius:50%;object-fit:cover;object-position:top;flex-shrink:0">
+    <div>
+      <p style="font-size:15px;font-weight:500;margin-bottom:4px">João Siqueira</p>
+      <p style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:500;margin-bottom:14px">Arquiteto & Designer · Rio de Janeiro</p>
+      <p style="font-size:13px;color:var(--g600);font-weight:300;line-height:1.8;margin-bottom:10px">Olá, sou João Siqueira, Arquiteto e Designer carioca, dedicado a criar espaços que transmitem o que somos, vivemos e acreditamos.</p>
+      <p style="font-size:13px;color:var(--g600);font-weight:300;line-height:1.8">Projetar vai além de fazer uma obra planejada — é traduzir experiências em espaços que conectam significado, propósito e funcionalidade.</p>
+      <p style="font-size:11px;color:var(--acc);margin-top:14px;font-weight:400">arqjoaosiqueira.com.br</p>
     </div>
   </div>
 
   <div class="divider"></div>
 
-  <p class="section-title">Próximo passo</p>
+  <!-- CTA -->
+  <p class="stitle">Próximo passo</p>
   <div class="cta-card">
-    <p class="cta-title">Gostou da proposta?</p>
-    <p class="cta-text">Entre em contato para agendarmos a visita técnica e darmos início ao seu projeto.</p>
+    <p class="cta-t">Gostou da proposta?</p>
+    <p class="cta-d">Entre em contato com João Siqueira para agendarmos a visita técnica e darmos início ao seu projeto.</p>
   </div>
-  <a href="https://wa.me/5521981613242?text=Quero%20Fechar!" target="_blank" class="wa-btn">
+  <a href="https://wa.me/5521981613242?text=Quero%20Fechar!" target="_blank" class="wa">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="#25D366"/>
       <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.857L.057 23.882a.5.5 0 00.611.611l6.074-1.461A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.793 9.793 0 01-5.003-1.374l-.36-.213-3.714.894.912-3.639-.234-.374A9.796 9.796 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z" fill="#25D366"/>
@@ -361,8 +399,8 @@
 </main>
 
 <footer class="footer">
-  <span class="footer-v">Proposta válida por 15 dias · Valores preliminares confirmados após visita técnica</span>
-  <span class="footer-b">João Siqueira Arquitetura & Interiores</span>
+  <span class="fv">arqjoaosiqueira.com.br · Proposta válida por 15 dias</span>
+  <span class="fb">João Siqueira Arquitetura & Interiores</span>
 </footer>
 
 </body>
